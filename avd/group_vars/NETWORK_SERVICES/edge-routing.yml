@@ -1,0 +1,28 @@
+---
+edge:
+  - name: EDGE
+    mac_vrf_vni_base: 10000
+    vrfs:
+      - name: VRF10
+        vrf_vni: 10
+        bgp_peer_groups:
+          - name: OVERLAY-EXTERNAL-PEERS
+            nodes:
+              - dc1-leaf2a
+              - dc1-leaf2b
+        svis:
+          - id: 2000
+            vxlan: false
+            name: 9504_BGP_Transit1
+            nodes:
+              - node: dc1-leaf2a
+                enabled: true
+                ip_address: 192.168.5.1/30
+
+          - id: 2001
+            vxlan: false
+            name: 9504_BGP_Transit2
+            nodes:
+              - node: dc1-leaf2b
+                enabled: true
+                ip_address: 192.168.5.5/30

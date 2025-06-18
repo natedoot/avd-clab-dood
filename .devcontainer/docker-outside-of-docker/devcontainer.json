@@ -1,0 +1,13 @@
+{
+    "image": "ghcr.io/srl-labs/containerlab/devcontainer-dood-slim:sha-a90b668",
+    "runArgs": [
+        "--network=host",
+        "--pid=host",
+        "--privileged"
+    ],
+    "mounts": [   
+        "type=bind,source=/var/run/docker.sock,target=/var/run/docker.sock"
+    ],
+    "workspaceFolder": "${localWorkspaceFolder}",
+    "workspaceMount": "source=${localWorkspaceFolder},target=${localWorkspaceFolder},type=bind"
+}

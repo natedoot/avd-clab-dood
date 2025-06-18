@@ -1,0 +1,84 @@
+tenant-a:
+- name: TENANT-A
+  mac_vrf_vni_base: 10000
+  vrfs:
+  - name: VRF10
+    vrf_vni: 10
+    vtep_diagnostic:
+      loopback: 10
+      loopback_ip_range: 10.255.10.0/27
+    svis:
+    - id: 11
+      name: VRF10_VLAN11
+      enabled: true
+      ip_address_virtual: 10.10.11.1/24
+    - id: 12
+      name: VRF10_VLAN12
+      enabled: true
+      ip_address_virtual: 10.10.12.1/24
+    - id: 5
+      name: '5'
+      ip_address: 10.10.5.1/24
+    - id: 15
+      name: VRF10_VLAN15
+      ip_address: 10.10.15.1/24
+      enabled: true
+  - name: VRF11
+    vrf_vni: 11
+    vtep_diagnostic:
+      loopback: 11
+      loopback_ip_range: 10.255.11.0/27
+    svis:
+    - id: 21
+      name: VRF11_VLAN21
+      enabled: true
+      ip_address_virtual: 10.10.21.1/24
+    - id: 22
+      name: VRF11_VLAN22
+      enabled: true
+      ip_address_virtual: 10.10.22.1/24
+    - id: 60
+      name: VRF11_VLAN60
+      ip_address: 10.10.60.1/24
+      enabled: true
+  - name: VRF12
+    vrf_vni: 12
+    svis:
+    - id: 31
+      name: VRF12_VLAN31
+      ip_address: 10.10.31.1/24
+      enabled: true
+  l2vlans:
+  - id: 3401
+    name: L2_VLAN3401
+  - id: 3402
+    name: L2_VLAN3402
+tenant-b:
+- name: TENANT-B
+  mac_vrf_vni_base: 10000
+  vrfs:
+  - name: VRF12
+    vrf_vni: 12
+    svis:
+    - id: 32
+      name: VRF12_VLAN32
+      ip_address: 10.10.32.1/24
+      enabled: true
+hr:
+- name: hr
+  mac_vrf_vni_base: 10000
+  vrfs:
+  - name: hrvrf
+    vrf_vni: 13
+    svis:
+    - id: 50
+      name: hr-50
+      ip_address: 10.10.50.1/24
+      enabled: true
+  - name: VRF11
+    vrf_vni: 11
+    svis:
+    - id: 23
+      name: VRF11_VLAN23
+      ip_address: 10.10.23.1/24
+      enabled: true

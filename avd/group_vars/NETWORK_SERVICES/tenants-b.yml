@@ -1,0 +1,11 @@
+tenant-b:
+  - name: TENANT-B
+    mac_vrf_vni_base: 10000
+    vrfs:
+      - name: VRF11
+        vrf_vni: 11
+        svis:
+          - id: 23
+            name: VRF11_VLAN23
+            enabled: true
+            ip_address_virtual: 10.10.23.1/24
