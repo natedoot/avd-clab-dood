@@ -192,3 +192,4 @@ $ sudo containerlab deploy -t dc1.yml --reconfigure
 
 Happy lab-bing!  Feel free to open Issues/PRs if you hit snags or want new features.
 
+![Topology Diagram](assets/clab-dc1-topo.png)

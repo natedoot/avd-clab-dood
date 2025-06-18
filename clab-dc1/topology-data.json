@@ -1,0 +1,665 @@
+{
+  "name": "dc1",
+  "type": "clab",
+  "clab": {
+    "config": {
+      "prefix": "",
+      "mgmt": {
+        "network": "custom_mgmt",
+        "bridge": "br-98490d29280c",
+        "ipv4-subnet": "192.168.0.0/24",
+        "ipv4-gw": "192.168.0.1",
+        "external-access": true
+      }
+    }
+  },
+  "ssh-pub-keys": ["ecdsa-sha2-nistp256 AAAAE2VjZHNhLXNoYTItbmlzdHAyNTYAAAAIbmlzdHAyNTYAAABBBPb7cNML152S/LepzfY37KN6Qs5X57CBXfATeKRIqmXiYWE2TiWSYyFZ9GU4uCT4NWtVfgIi1Zl3VFiUJjyR+vA=","ssh-ed25519 AAAAC3NzaC1lZDI1NTE5AAAAIDWZmEzBMDwSA9CkM1I8QShKkBWIUEBs1prC9cNE8h7b"],
+  "nodes": {
+    "dc1-leaf1a": {
+      "index": "0",
+      "shortname": "dc1-leaf1a",
+      "longname": "dc1-leaf1a",
+      "fqdn": "dc1-leaf1a.dc1.io",
+      "group": "",
+      "labdir": "/Users/nate.shaw/git_projects/avd-clab-dood/clab-dc1/dc1-leaf1a",
+      "kind": "ceos",
+      "image": "ceos:arm4.33.1",
+      "mgmt-net": "",
+      "mgmt-intf": "Management0",
+      "mgmt-ipv4-address": "192.168.0.103",
+      "mgmt-ipv4-prefix-length": 24,
+      "mgmt-ipv6-address": "",
+      "mgmt-ipv6-prefix-length": 0,
+      "mac-address": "00:1c:73:ff:a1:1f",
+      "labels": {
+        "clab-mgmt-net-bridge": "br-98490d29280c",
+        "clab-node-group": "",
+        "clab-node-kind": "ceos",
+        "clab-node-lab-dir": "/Users/nate.shaw/git_projects/avd-clab-dood/clab-dc1/dc1-leaf1a",
+        "clab-node-longname": "dc1-leaf1a",
+        "clab-node-name": "dc1-leaf1a",
+        "clab-node-type": "",
+        "clab-owner": "vscode",
+        "clab-topo-file": "/Users/nate.shaw/git_projects/avd-clab-dood/dc1.yml",
+        "containerlab": "dc1"
+      },
+      "port-bindings": [
+        {
+          "host-ip": "0.0.0.0",
+          "host-port": 44303,
+          "port": 443,
+          "protocol": "tcp"
+        },
+        {
+          "host-ip": "0.0.0.0",
+          "host-port": 8003,
+          "port": 80,
+          "protocol": "tcp"
+        },
+        {
+          "host-ip": "0.0.0.0",
+          "host-port": 22003,
+          "port": 22,
+          "protocol": "tcp"
+        }
+      ]
+    },
+    "dc1-leaf1b": {
+      "index": "1",
+      "shortname": "dc1-leaf1b",
+      "longname": "dc1-leaf1b",
+      "fqdn": "dc1-leaf1b.dc1.io",
+      "group": "",
+      "labdir": "/Users/nate.shaw/git_projects/avd-clab-dood/clab-dc1/dc1-leaf1b",
+      "kind": "ceos",
+      "image": "ceos:arm4.33.1",
+      "mgmt-net": "",
+      "mgmt-intf": "Management0",
+      "mgmt-ipv4-address": "192.168.0.104",
+      "mgmt-ipv4-prefix-length": 24,
+      "mgmt-ipv6-address": "",
+      "mgmt-ipv6-prefix-length": 0,
+      "mac-address": "00:1c:73:0f:ea:1b",
+      "labels": {
+        "clab-mgmt-net-bridge": "br-98490d29280c",
+        "clab-node-group": "",
+        "clab-node-kind": "ceos",
+        "clab-node-lab-dir": "/Users/nate.shaw/git_projects/avd-clab-dood/clab-dc1/dc1-leaf1b",
+        "clab-node-longname": "dc1-leaf1b",
+        "clab-node-name": "dc1-leaf1b",
+        "clab-node-type": "",
+        "clab-owner": "vscode",
+        "clab-topo-file": "/Users/nate.shaw/git_projects/avd-clab-dood/dc1.yml",
+        "containerlab": "dc1"
+      },
+      "port-bindings": [
+        {
+          "host-ip": "0.0.0.0",
+          "host-port": 22004,
+          "port": 22,
+          "protocol": "tcp"
+        },
+        {
+          "host-ip": "0.0.0.0",
+          "host-port": 44304,
+          "port": 443,
+          "protocol": "tcp"
+        },
+        {
+          "host-ip": "0.0.0.0",
+          "host-port": 8004,
+          "port": 80,
+          "protocol": "tcp"
+        }
+      ]
+    },
+    "dc1-leaf2a": {
+      "index": "2",
+      "shortname": "dc1-leaf2a",
+      "longname": "dc1-leaf2a",
+      "fqdn": "dc1-leaf2a.dc1.io",
+      "group": "",
+      "labdir": "/Users/nate.shaw/git_projects/avd-clab-dood/clab-dc1/dc1-leaf2a",
+      "kind": "ceos",
+      "image": "ceos:arm4.33.1",
+      "mgmt-net": "",
+      "mgmt-intf": "Management0",
+      "mgmt-ipv4-address": "192.168.0.105",
+      "mgmt-ipv4-prefix-length": 24,
+      "mgmt-ipv6-address": "",
+      "mgmt-ipv6-prefix-length": 0,
+      "mac-address": "00:1c:73:21:f5:15",
+      "labels": {
+        "clab-mgmt-net-bridge": "br-98490d29280c",
+        "clab-node-group": "",
+        "clab-node-kind": "ceos",
+        "clab-node-lab-dir": "/Users/nate.shaw/git_projects/avd-clab-dood/clab-dc1/dc1-leaf2a",
+        "clab-node-longname": "dc1-leaf2a",
+        "clab-node-name": "dc1-leaf2a",
+        "clab-node-type": "",
+        "clab-owner": "vscode",
+        "clab-topo-file": "/Users/nate.shaw/git_projects/avd-clab-dood/dc1.yml",
+        "containerlab": "dc1"
+      },
+      "port-bindings": [
+        {
+          "host-ip": "0.0.0.0",
+          "host-port": 22005,
+          "port": 22,
+          "protocol": "tcp"
+        },
+        {
+          "host-ip": "0.0.0.0",
+          "host-port": 44305,
+          "port": 443,
+          "protocol": "tcp"
+        },
+        {
+          "host-ip": "0.0.0.0",
+          "host-port": 8005,
+          "port": 80,
+          "protocol": "tcp"
+        }
+      ]
+    },
+    "dc1-leaf2b": {
+      "index": "3",
+      "shortname": "dc1-leaf2b",
+      "longname": "dc1-leaf2b",
+      "fqdn": "dc1-leaf2b.dc1.io",
+      "group": "",
+      "labdir": "/Users/nate.shaw/git_projects/avd-clab-dood/clab-dc1/dc1-leaf2b",
+      "kind": "ceos",
+      "image": "ceos:arm4.33.1",
+      "mgmt-net": "",
+      "mgmt-intf": "Management0",
+      "mgmt-ipv4-address": "192.168.0.106",
+      "mgmt-ipv4-prefix-length": 24,
+      "mgmt-ipv6-address": "",
+      "mgmt-ipv6-prefix-length": 0,
+      "mac-address": "00:1c:73:75:9b:02",
+      "labels": {
+        "clab-mgmt-net-bridge": "br-98490d29280c",
+        "clab-node-group": "",
+        "clab-node-kind": "ceos",
+        "clab-node-lab-dir": "/Users/nate.shaw/git_projects/avd-clab-dood/clab-dc1/dc1-leaf2b",
+        "clab-node-longname": "dc1-leaf2b",
+        "clab-node-name": "dc1-leaf2b",
+        "clab-node-type": "",
+        "clab-owner": "vscode",
+        "clab-topo-file": "/Users/nate.shaw/git_projects/avd-clab-dood/dc1.yml",
+        "containerlab": "dc1"
+      },
+      "port-bindings": [
+        {
+          "host-ip": "0.0.0.0",
+          "host-port": 22006,
+          "port": 22,
+          "protocol": "tcp"
+        },
+        {
+          "host-ip": "0.0.0.0",
+          "host-port": 44306,
+          "port": 443,
+          "protocol": "tcp"
+        },
+        {
+          "host-ip": "0.0.0.0",
+          "host-port": 8006,
+          "port": 80,
+          "protocol": "tcp"
+        }
+      ]
+    },
+    "dc1-leaf3a": {
+      "index": "4",
+      "shortname": "dc1-leaf3a",
+      "longname": "dc1-leaf3a",
+      "fqdn": "dc1-leaf3a.dc1.io",
+      "group": "",
+      "labdir": "/Users/nate.shaw/git_projects/avd-clab-dood/clab-dc1/dc1-leaf3a",
+      "kind": "ceos",
+      "image": "ceos:arm4.33.1",
+      "mgmt-net": "",
+      "mgmt-intf": "Management0",
+      "mgmt-ipv4-address": "192.168.0.107",
+      "mgmt-ipv4-prefix-length": 24,
+      "mgmt-ipv6-address": "",
+      "mgmt-ipv6-prefix-length": 0,
+      "mac-address": "00:1c:73:c2:3f:32",
+      "labels": {
+        "clab-mgmt-net-bridge": "br-98490d29280c",
+        "clab-node-group": "",
+        "clab-node-kind": "ceos",
+        "clab-node-lab-dir": "/Users/nate.shaw/git_projects/avd-clab-dood/clab-dc1/dc1-leaf3a",
+        "clab-node-longname": "dc1-leaf3a",
+        "clab-node-name": "dc1-leaf3a",
+        "clab-node-type": "",
+        "clab-owner": "vscode",
+        "clab-topo-file": "/Users/nate.shaw/git_projects/avd-clab-dood/dc1.yml",
+        "containerlab": "dc1"
+      },
+      "port-bindings": [
+        {
+          "host-ip": "0.0.0.0",
+          "host-port": 22007,
+          "port": 22,
+          "protocol": "tcp"
+        },
+        {
+          "host-ip": "0.0.0.0",
+          "host-port": 44307,
+          "port": 443,
+          "protocol": "tcp"
+        },
+        {
+          "host-ip": "0.0.0.0",
+          "host-port": 8007,
+          "port": 80,
+          "protocol": "tcp"
+        }
+      ]
+    },
+    "dc1-leaf3b": {
+      "index": "5",
+      "shortname": "dc1-leaf3b",
+      "longname": "dc1-leaf3b",
+      "fqdn": "dc1-leaf3b.dc1.io",
+      "group": "",
+      "labdir": "/Users/nate.shaw/git_projects/avd-clab-dood/clab-dc1/dc1-leaf3b",
+      "kind": "ceos",
+      "image": "ceos:arm4.33.1",
+      "mgmt-net": "",
+      "mgmt-intf": "Management0",
+      "mgmt-ipv4-address": "192.168.0.108",
+      "mgmt-ipv4-prefix-length": 24,
+      "mgmt-ipv6-address": "",
+      "mgmt-ipv6-prefix-length": 0,
+      "mac-address": "00:1c:73:d7:7a:72",
+      "labels": {
+        "clab-mgmt-net-bridge": "br-98490d29280c",
+        "clab-node-group": "",
+        "clab-node-kind": "ceos",
+        "clab-node-lab-dir": "/Users/nate.shaw/git_projects/avd-clab-dood/clab-dc1/dc1-leaf3b",
+        "clab-node-longname": "dc1-leaf3b",
+        "clab-node-name": "dc1-leaf3b",
+        "clab-node-type": "",
+        "clab-owner": "vscode",
+        "clab-topo-file": "/Users/nate.shaw/git_projects/avd-clab-dood/dc1.yml",
+        "containerlab": "dc1"
+      },
+      "port-bindings": [
+        {
+          "host-ip": "0.0.0.0",
+          "host-port": 44308,
+          "port": 443,
+          "protocol": "tcp"
+        },
+        {
+          "host-ip": "0.0.0.0",
+          "host-port": 8008,
+          "port": 80,
+          "protocol": "tcp"
+        },
+        {
+          "host-ip": "0.0.0.0",
+          "host-port": 22008,
+          "port": 22,
+          "protocol": "tcp"
+        }
+      ]
+    },
+    "dc1-spine1": {
+      "index": "6",
+      "shortname": "dc1-spine1",
+      "longname": "dc1-spine1",
+      "fqdn": "dc1-spine1.dc1.io",
+      "group": "",
+      "labdir": "/Users/nate.shaw/git_projects/avd-clab-dood/clab-dc1/dc1-spine1",
+      "kind": "ceos",
+      "image": "ceos:arm4.33.1",
+      "mgmt-net": "",
+      "mgmt-intf": "Management0",
+      "mgmt-ipv4-address": "192.168.0.101",
+      "mgmt-ipv4-prefix-length": 24,
+      "mgmt-ipv6-address": "",
+      "mgmt-ipv6-prefix-length": 0,
+      "mac-address": "00:1c:73:5a:56:86",
+      "labels": {
+        "clab-mgmt-net-bridge": "br-98490d29280c",
+        "clab-node-group": "",
+        "clab-node-kind": "ceos",
+        "clab-node-lab-dir": "/Users/nate.shaw/git_projects/avd-clab-dood/clab-dc1/dc1-spine1",
+        "clab-node-longname": "dc1-spine1",
+        "clab-node-name": "dc1-spine1",
+        "clab-node-type": "",
+        "clab-owner": "vscode",
+        "clab-topo-file": "/Users/nate.shaw/git_projects/avd-clab-dood/dc1.yml",
+        "containerlab": "dc1"
+      },
+      "port-bindings": [
+        {
+          "host-ip": "0.0.0.0",
+          "host-port": 8001,
+          "port": 80,
+          "protocol": "tcp"
+        },
+        {
+          "host-ip": "0.0.0.0",
+          "host-port": 22001,
+          "port": 22,
+          "protocol": "tcp"
+        },
+        {
+          "host-ip": "0.0.0.0",
+          "host-port": 44301,
+          "port": 443,
+          "protocol": "tcp"
+        }
+      ]
+    },
+    "dc1-spine2": {
+      "index": "7",
+      "shortname": "dc1-spine2",
+      "longname": "dc1-spine2",
+      "fqdn": "dc1-spine2.dc1.io",
+      "group": "",
+      "labdir": "/Users/nate.shaw/git_projects/avd-clab-dood/clab-dc1/dc1-spine2",
+      "kind": "ceos",
+      "image": "ceos:arm4.33.1",
+      "mgmt-net": "",
+      "mgmt-intf": "Management0",
+      "mgmt-ipv4-address": "192.168.0.102",
+      "mgmt-ipv4-prefix-length": 24,
+      "mgmt-ipv6-address": "",
+      "mgmt-ipv6-prefix-length": 0,
+      "mac-address": "00:1c:73:86:9e:d1",
+      "labels": {
+        "clab-mgmt-net-bridge": "br-98490d29280c",
+        "clab-node-group": "",
+        "clab-node-kind": "ceos",
+        "clab-node-lab-dir": "/Users/nate.shaw/git_projects/avd-clab-dood/clab-dc1/dc1-spine2",
+        "clab-node-longname": "dc1-spine2",
+        "clab-node-name": "dc1-spine2",
+        "clab-node-type": "",
+        "clab-owner": "vscode",
+        "clab-topo-file": "/Users/nate.shaw/git_projects/avd-clab-dood/dc1.yml",
+        "containerlab": "dc1"
+      },
+      "port-bindings": [
+        {
+          "host-ip": "0.0.0.0",
+          "host-port": 22002,
+          "port": 22,
+          "protocol": "tcp"
+        },
+        {
+          "host-ip": "0.0.0.0",
+          "host-port": 44302,
+          "port": 443,
+          "protocol": "tcp"
+        },
+        {
+          "host-ip": "0.0.0.0",
+          "host-port": 8002,
+          "port": 80,
+          "protocol": "tcp"
+        }
+      ]
+    }
+  },
+  "links": [
+    {
+      "a": {
+        "node": "dc1-spine1",
+        "interface": "et1",
+        "mac": "aa:c1:ab:64:4c:94",
+        "peer": "z"
+      },
+      "z": {
+        "node": "dc1-leaf1a",
+        "interface": "et1",
+        "mac": "aa:c1:ab:45:d3:43",
+        "peer": "a"
+      }
+    },
+    {
+      "a": {
+        "node": "dc1-spine1",
+        "interface": "et2",
+        "mac": "aa:c1:ab:05:71:6b",
+        "peer": "z"
+      },
+      "z": {
+        "node": "dc1-leaf1b",
+        "interface": "et1",
+        "mac": "aa:c1:ab:a8:76:75",
+        "peer": "a"
+      }
+    },
+    {
+      "a": {
+        "node": "dc1-spine1",
+        "interface": "et3",
+        "mac": "aa:c1:ab:6c:e9:e0",
+        "peer": "z"
+      },
+      "z": {
+        "node": "dc1-leaf2a",
+        "interface": "et1",
+        "mac": "aa:c1:ab:29:f7:57",
+        "peer": "a"
+      }
+    },
+    {
+      "a": {
+        "node": "dc1-spine1",
+        "interface": "et4",
+        "mac": "aa:c1:ab:91:85:e7",
+        "peer": "z"
+      },
+      "z": {
+        "node": "dc1-leaf2b",
+        "interface": "et1",
+        "mac": "aa:c1:ab:1d:60:13",
+        "peer": "a"
+      }
+    },
+    {
+      "a": {
+        "node": "dc1-spine1",
+        "interface": "et5",
+        "mac": "aa:c1:ab:f3:be:5b",
+        "peer": "z"
+      },
+      "z": {
+        "node": "dc1-leaf3a",
+        "interface": "et1",
+        "mac": "aa:c1:ab:08:71:a6",
+        "peer": "a"
+      }
+    },
+    {
+      "a": {
+        "node": "dc1-spine1",
+        "interface": "et6",
+        "mac": "aa:c1:ab:c6:2d:58",
+        "peer": "z"
+      },
+      "z": {
+        "node": "dc1-leaf3b",
+        "interface": "et1",
+        "mac": "aa:c1:ab:65:98:23",
+        "peer": "a"
+      }
+    },
+    {
+      "a": {
+        "node": "dc1-spine2",
+        "interface": "et1",
+        "mac": "aa:c1:ab:7b:d6:02",
+        "peer": "z"
+      },
+      "z": {
+        "node": "dc1-leaf1a",
+        "interface": "et2",
+        "mac": "aa:c1:ab:c3:e3:80",
+        "peer": "a"
+      }
+    },
+    {
+      "a": {
+        "node": "dc1-spine2",
+        "interface": "et2",
+        "mac": "aa:c1:ab:1d:a6:2a",
+        "peer": "z"
+      },
+      "z": {
+        "node": "dc1-leaf1b",
+        "interface": "et2",
+        "mac": "aa:c1:ab:b9:b8:b4",
+        "peer": "a"
+      }
+    },
+    {
+      "a": {
+        "node": "dc1-spine2",
+        "interface": "et3",
+        "mac": "aa:c1:ab:24:87:ad",
+        "peer": "z"
+      },
+      "z": {
+        "node": "dc1-leaf2a",
+        "interface": "et2",
+        "mac": "aa:c1:ab:d8:6c:c3",
+        "peer": "a"
+      }
+    },
+    {
+      "a": {
+        "node": "dc1-spine2",
+        "interface": "et4",
+        "mac": "aa:c1:ab:ba:36:7a",
+        "peer": "z"
+      },
+      "z": {
+        "node": "dc1-leaf2b",
+        "interface": "et2",
+        "mac": "aa:c1:ab:a0:b9:22",
+        "peer": "a"
+      }
+    },
+    {
+      "a": {
+        "node": "dc1-spine2",
+        "interface": "et5",
+        "mac": "aa:c1:ab:f2:82:0b",
+        "peer": "z"
+      },
+      "z": {
+        "node": "dc1-leaf3a",
+        "interface": "et2",
+        "mac": "aa:c1:ab:7c:aa:b5",
+        "peer": "a"
+      }
+    },
+    {
+      "a": {
+        "node": "dc1-spine2",
+        "interface": "et6",
+        "mac": "aa:c1:ab:76:40:53",
+        "peer": "z"
+      },
+      "z": {
+        "node": "dc1-leaf3b",
+        "interface": "et2",
+        "mac": "aa:c1:ab:19:2c:6c",
+        "peer": "a"
+      }
+    },
+    {
+      "a": {
+        "node": "dc1-leaf1a",
+        "interface": "et3",
+        "mac": "aa:c1:ab:0c:b0:f5",
+        "peer": "z"
+      },
+      "z": {
+        "node": "dc1-leaf1b",
+        "interface": "et3",
+        "mac": "aa:c1:ab:f0:ac:88",
+        "peer": "a"
+      }
+    },
+    {
+      "a": {
+        "node": "dc1-leaf1a",
+        "interface": "et4",
+        "mac": "aa:c1:ab:75:eb:5f",
+        "peer": "z"
+      },
+      "z": {
+        "node": "dc1-leaf1b",
+        "interface": "et4",
+        "mac": "aa:c1:ab:d3:f3:46",
+        "peer": "a"
+      }
+    },
+    {
+      "a": {
+        "node": "dc1-leaf2a",
+        "interface": "et3",
+        "mac": "aa:c1:ab:60:5a:a2",
+        "peer": "z"
+      },
+      "z": {
+        "node": "dc1-leaf2b",
+        "interface": "et3",
+        "mac": "aa:c1:ab:49:36:18",
+        "peer": "a"
+      }
+    },
+    {
+      "a": {
+        "node": "dc1-leaf2a",
+        "interface": "et4",
+        "mac": "aa:c1:ab:d2:e1:1a",
+        "peer": "z"
+      },
+      "z": {
+        "node": "dc1-leaf2b",
+        "interface": "et4",
+        "mac": "aa:c1:ab:8d:44:2a",
+        "peer": "a"
+      }
+    },
+    {
+      "a": {
+        "node": "dc1-leaf3a",
+        "interface": "et3",
+        "mac": "aa:c1:ab:fd:fb:59",
+        "peer": "z"
+      },
+      "z": {
+        "node": "dc1-leaf3b",
+        "interface": "et3",
+        "mac": "aa:c1:ab:b5:7c:9c",
+        "peer": "a"
+      }
+    },
+    {
+      "a": {
+        "node": "dc1-leaf3a",
+        "interface": "et4",
+        "mac": "aa:c1:ab:37:4f:fa",
+        "peer": "z"
+      },
+      "z": {
+        "node": "dc1-leaf3b",
+        "interface": "et4",
+        "mac": "aa:c1:ab:36:90:4b",
+        "peer": "a"
+      }
+    }
+  ]
+}
