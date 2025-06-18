@@ -82,9 +82,9 @@ interface Management0
 
 #### Management API HTTP Summary
 
-| HTTP | HTTPS | Default Services |
-| ---- | ----- | ---------------- |
-| False | True | - |
+| HTTP | HTTPS | UNIX-Socket | Default Services |
+| ---- | ----- | ----------- | ---------------- |
+| False | True | - | - |
 
 #### Management API VRF Access
 
@@ -119,7 +119,7 @@ management api http-commands
 
 ```eos
 !
-username admin privilege 15 role network-admin nopassword
+username admin privilege 15 role network-admin secret sha512 <removed>
 username cvpadmin privilege 15 role network-admin secret sha512 <removed>
 ```
 
@@ -821,9 +821,9 @@ ASN Notation: asplain
 
 ##### EVPN Peer Groups
 
-| Peer Group | Activate | Route-map In | Route-map Out | Encapsulation |
-| ---------- | -------- | ------------ | ------------- | ------------- |
-| EVPN-OVERLAY-PEERS | True |  - | - | default |
+| Peer Group | Activate | Route-map In | Route-map Out | Encapsulation | Next-hop-self Source Interface |
+| ---------- | -------- | ------------ | ------------- | ------------- | ------------------------------ |
+| EVPN-OVERLAY-PEERS | True |  - | - | default | - |
 
 #### Router BGP VLANs
 
@@ -845,12 +845,12 @@ ASN Notation: asplain
 
 #### Router BGP VRFs
 
-| VRF | Route-Distinguisher | Redistribute |
-| --- | ------------------- | ------------ |
-| hrvrf | 10.255.0.3:13 | connected |
-| VRF10 | 10.255.0.3:10 | connected |
-| VRF11 | 10.255.0.3:11 | connected |
-| VRF12 | 10.255.0.3:12 | connected |
+| VRF | Route-Distinguisher | Redistribute | Graceful Restart |
+| --- | ------------------- | ------------ | ---------------- |
+| hrvrf | 10.255.0.3:13 | connected | - |
+| VRF10 | 10.255.0.3:10 | connected | - |
+| VRF11 | 10.255.0.3:11 | connected | - |
+| VRF12 | 10.255.0.3:12 | connected | - |
 
 #### Router BGP Device Configuration
 

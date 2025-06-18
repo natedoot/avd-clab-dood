@@ -6,8 +6,8 @@
   gather_facts: false
   
   vars:
-    ansible_user: cvpadmin
-    ansible_password: arista123
+    ansible_user: admin
+    ansible_password: admin
     ansible_network_os: arista.eos.eos
     # Configure privilege escalation
     ansible_become: true

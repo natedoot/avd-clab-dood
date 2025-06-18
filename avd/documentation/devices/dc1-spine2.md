@@ -67,9 +67,9 @@ interface Management0
 
 #### Management API HTTP Summary
 
-| HTTP | HTTPS | Default Services |
-| ---- | ----- | ---------------- |
-| False | True | - |
+| HTTP | HTTPS | UNIX-Socket | Default Services |
+| ---- | ----- | ----------- | ---------------- |
+| False | True | - | - |
 
 #### Management API VRF Access
 
@@ -104,7 +104,7 @@ management api http-commands
 
 ```eos
 !
-username admin privilege 15 role network-admin nopassword
+username admin privilege 15 role network-admin secret sha512 <removed>
 username cvpadmin privilege 15 role network-admin secret sha512 <removed>
 ```
 
@@ -381,9 +381,9 @@ ASN Notation: asplain
 
 ##### EVPN Peer Groups
 
-| Peer Group | Activate | Route-map In | Route-map Out | Encapsulation |
-| ---------- | -------- | ------------ | ------------- | ------------- |
-| EVPN-OVERLAY-PEERS | True |  - | - | default |
+| Peer Group | Activate | Route-map In | Route-map Out | Encapsulation | Next-hop-self Source Interface |
+| ---------- | -------- | ------------ | ------------- | ------------- | ------------------------------ |
+| EVPN-OVERLAY-PEERS | True |  - | - | default | - |
 
 #### Router BGP Device Configuration
 

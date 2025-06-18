@@ -72,7 +72,7 @@ local_users:
   - name: admin
     privilege: 15
     role: network-admin
-    no_password: true
+    sha512_password: $6$W05DskxvIxpuMqCH$SQL0AqBfYnfz.FFexUoVJ/VthB0hL0FFp2HprHXKbnI3xWbeYjh8gsJ8MD7CXjTWr2acDMvpKQj3PooZQY/6y1
   - name: cvpadmin
     privilege: 15
     role: network-admin
