@@ -4,16 +4,6 @@ aaa_authorization:
 aaa_root:
   disabled: true
 config_end: true
-daemon_terminattr:
-  cvaddrs:
-  - 192.168.0.5:9910
-  cvauth:
-    method: token
-    token_file: /tmp/token
-  cvvrf: default
-  disable_aaa: true
-  ingestexclude: /Sysdb/cell/1/agent,/Sysdb/cell/2/agent
-  smashexcludes: ale,flexCounter,hardware,kni,pulse,strata
 enable_password:
   disabled: true
 ethernet_interfaces:
@@ -194,13 +184,11 @@ router_bgp:
     remote_as: '65102'
     description: dc1-leaf2b
     next_hop_self: true
-    password: 4b21pAdCvWeAqpcKDFMdWw==
     send_community: all
     maximum_routes: 12000
     route_map_in: RM-MLAG-PEER-IN
   - name: IPv4-UNDERLAY-PEERS
     type: ipv4
-    password: 7x4B4rnJhZB438m9+BrBfQ==
     send_community: all
     maximum_routes: 12000
   - name: EVPN-OVERLAY-PEERS
@@ -208,7 +196,6 @@ router_bgp:
     update_source: Loopback0
     bfd: true
     ebgp_multihop: 3
-    password: Q4fqtbqcZ7oQuKfuWtNGRQ==
     send_community: all
     maximum_routes: 0
   neighbors:

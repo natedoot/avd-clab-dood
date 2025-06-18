@@ -9,8 +9,6 @@
   - [Local Users](#local-users)
   - [Enable Password](#enable-password)
   - [AAA Authorization](#aaa-authorization)
-- [Monitoring](#monitoring)
-  - [TerminAttr Daemon](#terminattr-daemon)
 - [Spanning Tree](#spanning-tree)
   - [Spanning Tree Summary](#spanning-tree-summary)
   - [Spanning Tree Device Configuration](#spanning-tree-device-configuration)
@@ -127,25 +125,6 @@ Authorization for configuration commands is disabled.
 ```eos
 aaa authorization exec default local
 !
-```
-
-## Monitoring
-
-### TerminAttr Daemon
-
-#### TerminAttr Daemon Summary
-
-| CV Compression | CloudVision Servers | VRF | Authentication | Smash Excludes | Ingest Exclude | Bypass AAA |
-| -------------- | ------------------- | --- | -------------- | -------------- | -------------- | ---------- |
-| gzip | 192.168.0.5:9910 | default | token,/tmp/token | ale,flexCounter,hardware,kni,pulse,strata | /Sysdb/cell/1/agent,/Sysdb/cell/2/agent | True |
-
-#### TerminAttr Daemon Device Configuration
-
-```eos
-!
-daemon TerminAttr
-   exec /usr/bin/TerminAttr -cvaddr=192.168.0.5:9910 -cvauth=token,/tmp/token -cvvrf=default -disableaaa -smashexcludes=ale,flexCounter,hardware,kni,pulse,strata -ingestexclude=/Sysdb/cell/1/agent,/Sysdb/cell/2/agent -taillogs
-   no shutdown
 ```
 
 ## Spanning Tree
@@ -398,11 +377,9 @@ router bgp 65100
    neighbor EVPN-OVERLAY-PEERS update-source Loopback0
    neighbor EVPN-OVERLAY-PEERS bfd
    neighbor EVPN-OVERLAY-PEERS ebgp-multihop 3
-   neighbor EVPN-OVERLAY-PEERS password 7 <removed>
    neighbor EVPN-OVERLAY-PEERS send-community
    neighbor EVPN-OVERLAY-PEERS maximum-routes 0
    neighbor IPv4-UNDERLAY-PEERS peer group
-   neighbor IPv4-UNDERLAY-PEERS password 7 <removed>
    neighbor IPv4-UNDERLAY-PEERS send-community
    neighbor IPv4-UNDERLAY-PEERS maximum-routes 12000
    neighbor 10.255.0.3 peer group EVPN-OVERLAY-PEERS

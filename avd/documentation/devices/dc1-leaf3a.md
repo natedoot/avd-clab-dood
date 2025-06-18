@@ -9,8 +9,6 @@
   - [Local Users](#local-users)
   - [Enable Password](#enable-password)
   - [AAA Authorization](#aaa-authorization)
-- [Monitoring](#monitoring)
-  - [TerminAttr Daemon](#terminattr-daemon)
 - [MLAG](#mlag)
   - [MLAG Summary](#mlag-summary)
   - [MLAG Device Configuration](#mlag-device-configuration)
@@ -142,25 +140,6 @@ Authorization for configuration commands is disabled.
 ```eos
 aaa authorization exec default local
 !
-```
-
-## Monitoring
-
-### TerminAttr Daemon
-
-#### TerminAttr Daemon Summary
-
-| CV Compression | CloudVision Servers | VRF | Authentication | Smash Excludes | Ingest Exclude | Bypass AAA |
-| -------------- | ------------------- | --- | -------------- | -------------- | -------------- | ---------- |
-| gzip | 192.168.0.5:9910 | default | token,/tmp/token | ale,flexCounter,hardware,kni,pulse,strata | /Sysdb/cell/1/agent,/Sysdb/cell/2/agent | True |
-
-#### TerminAttr Daemon Device Configuration
-
-```eos
-!
-daemon TerminAttr
-   exec /usr/bin/TerminAttr -cvaddr=192.168.0.5:9910 -cvauth=token,/tmp/token -cvvrf=default -disableaaa -smashexcludes=ale,flexCounter,hardware,kni,pulse,strata -ingestexclude=/Sysdb/cell/1/agent,/Sysdb/cell/2/agent -taillogs
-   no shutdown
 ```
 
 ## MLAG
@@ -847,11 +826,9 @@ router bgp 65103
    neighbor EVPN-OVERLAY-PEERS update-source Loopback0
    neighbor EVPN-OVERLAY-PEERS bfd
    neighbor EVPN-OVERLAY-PEERS ebgp-multihop 3
-   neighbor EVPN-OVERLAY-PEERS password 7 <removed>
    neighbor EVPN-OVERLAY-PEERS send-community
    neighbor EVPN-OVERLAY-PEERS maximum-routes 0
    neighbor IPv4-UNDERLAY-PEERS peer group
-   neighbor IPv4-UNDERLAY-PEERS password 7 <removed>
    neighbor IPv4-UNDERLAY-PEERS send-community
    neighbor IPv4-UNDERLAY-PEERS maximum-routes 12000
    neighbor MLAG-IPv4-UNDERLAY-PEER peer group
@@ -859,7 +836,6 @@ router bgp 65103
    neighbor MLAG-IPv4-UNDERLAY-PEER next-hop-self
    neighbor MLAG-IPv4-UNDERLAY-PEER description dc1-leaf3b
    neighbor MLAG-IPv4-UNDERLAY-PEER route-map RM-MLAG-PEER-IN in
-   neighbor MLAG-IPv4-UNDERLAY-PEER password 7 <removed>
    neighbor MLAG-IPv4-UNDERLAY-PEER send-community
    neighbor MLAG-IPv4-UNDERLAY-PEER maximum-routes 12000
    neighbor 10.255.0.1 peer group EVPN-OVERLAY-PEERS
