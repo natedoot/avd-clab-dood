@@ -4,11 +4,15 @@
 
 - [Management](#management)
   - [Management Interfaces](#management-interfaces)
+  - [IP Name Servers](#ip-name-servers)
+  - [NTP](#ntp)
   - [Management API HTTP](#management-api-http)
 - [Authentication](#authentication)
   - [Local Users](#local-users)
   - [Enable Password](#enable-password)
   - [AAA Authorization](#aaa-authorization)
+- [Monitoring](#monitoring)
+  - [TerminAttr Daemon](#terminattr-daemon)
 - [MLAG](#mlag)
   - [MLAG Summary](#mlag-summary)
   - [MLAG Device Configuration](#mlag-device-configuration)
@@ -76,6 +80,44 @@ interface Management0
    ip address 192.168.0.106/24
 ```
 
+### IP Name Servers
+
+#### IP Name Servers Summary
+
+| Name Server | VRF | Priority |
+| ----------- | --- | -------- |
+| 8.8.8.8 | default | - |
+
+#### IP Name Servers Device Configuration
+
+```eos
+ip name-server vrf default 8.8.8.8
+```
+
+### NTP
+
+#### NTP Summary
+
+##### NTP Local Interface
+
+| Interface | VRF |
+| --------- | --- |
+| Management0 | default |
+
+##### NTP Servers
+
+| Server | VRF | Preferred | Burst | iBurst | Version | Min Poll | Max Poll | Local-interface | Key |
+| ------ | --- | --------- | ----- | ------ | ------- | -------- | -------- | --------------- | --- |
+| pool.ntp.org | default | True | - | True | - | - | - | - | - |
+
+#### NTP Device Configuration
+
+```eos
+!
+ntp local-interface Management0
+ntp server pool.ntp.org prefer iburst
+```
+
 ### Management API HTTP
 
 #### Management API HTTP Summary
@@ -140,6 +182,25 @@ Authorization for configuration commands is disabled.
 ```eos
 aaa authorization exec default local
 !
+```
+
+## Monitoring
+
+### TerminAttr Daemon
+
+#### TerminAttr Daemon Summary
+
+| CV Compression | CloudVision Servers | VRF | Authentication | Smash Excludes | Ingest Exclude | Bypass AAA |
+| -------------- | ------------------- | --- | -------------- | -------------- | -------------- | ---------- |
+| gzip | apiserver.cv-staging.corp.arista.io:443 | default | token-secure,/tmp/cv-onboarding-token | ale,flexCounter,hardware,kni,pulse,strata | /Sysdb/cell/1/agent,/Sysdb/cell/2/agent | False |
+
+#### TerminAttr Daemon Device Configuration
+
+```eos
+!
+daemon TerminAttr
+   exec /usr/bin/TerminAttr -cvaddr=apiserver.cv-staging.corp.arista.io:443 -cvauth=token-secure,/tmp/cv-onboarding-token -cvvrf=default -smashexcludes=ale,flexCounter,hardware,kni,pulse,strata -ingestexclude=/Sysdb/cell/1/agent,/Sysdb/cell/2/agent -taillogs
+   no shutdown
 ```
 
 ## MLAG
@@ -217,15 +278,14 @@ vlan internal order ascending range 1006 1199
 | 15 | VRF10_VLAN15 | - |
 | 21 | VRF11_VLAN21 | - |
 | 22 | VRF11_VLAN22 | - |
-| 23 | VRF11_VLAN23 | - |
 | 31 | VRF12_VLAN31 | - |
-| 32 | VRF12_VLAN32 | - |
-| 50 | hr-50 | - |
+| 45 | VRF12_VLAN45 | - |
+| 50 | vlan_50 | - |
 | 60 | VRF11_VLAN60 | - |
+| 300 | vlan_300 | - |
 | 3009 | MLAG_L3_VRF_VRF10 | MLAG |
 | 3010 | MLAG_L3_VRF_VRF11 | MLAG |
 | 3011 | MLAG_L3_VRF_VRF12 | MLAG |
-| 3012 | MLAG_L3_VRF_hrvrf | MLAG |
 | 3401 | L2_VLAN3401 | - |
 | 3402 | L2_VLAN3402 | - |
 | 4093 | MLAG_L3 | MLAG |
@@ -253,20 +313,20 @@ vlan 21
 vlan 22
    name VRF11_VLAN22
 !
-vlan 23
-   name VRF11_VLAN23
-!
 vlan 31
    name VRF12_VLAN31
 !
-vlan 32
-   name VRF12_VLAN32
+vlan 45
+   name VRF12_VLAN45
 !
 vlan 50
-   name hr-50
+   name vlan_50
 !
 vlan 60
    name VRF11_VLAN60
+!
+vlan 300
+   name vlan_300
 !
 vlan 3009
    name MLAG_L3_VRF_VRF10
@@ -278,10 +338,6 @@ vlan 3010
 !
 vlan 3011
    name MLAG_L3_VRF_VRF12
-   trunk group MLAG
-!
-vlan 3012
-   name MLAG_L3_VRF_hrvrf
    trunk group MLAG
 !
 vlan 3401
@@ -450,15 +506,14 @@ interface Loopback11
 | Vlan15 | VRF10_VLAN15 | VRF10 | - | False |
 | Vlan21 | VRF11_VLAN21 | VRF11 | - | False |
 | Vlan22 | VRF11_VLAN22 | VRF11 | - | False |
-| Vlan23 | VRF11_VLAN23 | VRF11 | - | False |
 | Vlan31 | VRF12_VLAN31 | VRF12 | - | False |
-| Vlan32 | VRF12_VLAN32 | VRF12 | - | False |
-| Vlan50 | hr-50 | hrvrf | - | False |
+| Vlan45 | VRF12_VLAN45 | VRF12 | - | False |
+| Vlan50 | vlan_50 | VRF10 | - | False |
 | Vlan60 | VRF11_VLAN60 | VRF11 | - | False |
+| Vlan300 | vlan_300 | VRF10 | - | False |
 | Vlan3009 | MLAG_L3_VRF_VRF10 | VRF10 | 1500 | False |
 | Vlan3010 | MLAG_L3_VRF_VRF11 | VRF11 | 1500 | False |
 | Vlan3011 | MLAG_L3_VRF_VRF12 | VRF12 | 1500 | False |
-| Vlan3012 | MLAG_L3_VRF_hrvrf | hrvrf | 1500 | False |
 | Vlan4093 | MLAG_L3 | default | 1500 | False |
 | Vlan4094 | MLAG | default | 1500 | False |
 
@@ -472,15 +527,14 @@ interface Loopback11
 | Vlan15 |  VRF10  |  10.10.15.1/24  |  -  |  -  |  -  |  -  |
 | Vlan21 |  VRF11  |  -  |  10.10.21.1/24  |  -  |  -  |  -  |
 | Vlan22 |  VRF11  |  -  |  10.10.22.1/24  |  -  |  -  |  -  |
-| Vlan23 |  VRF11  |  10.10.23.1/24  |  -  |  -  |  -  |  -  |
 | Vlan31 |  VRF12  |  10.10.31.1/24  |  -  |  -  |  -  |  -  |
-| Vlan32 |  VRF12  |  10.10.32.1/24  |  -  |  -  |  -  |  -  |
-| Vlan50 |  hrvrf  |  10.10.50.1/24  |  -  |  -  |  -  |  -  |
+| Vlan45 |  VRF12  |  10.10.45.1/24  |  -  |  -  |  -  |  -  |
+| Vlan50 |  VRF10  |  10.10.50.1/24  |  -  |  -  |  -  |  -  |
 | Vlan60 |  VRF11  |  10.10.60.1/24  |  -  |  -  |  -  |  -  |
+| Vlan300 |  VRF10  |  10.30.10.1/24  |  -  |  -  |  -  |  -  |
 | Vlan3009 |  VRF10  |  10.255.1.101/31  |  -  |  -  |  -  |  -  |
 | Vlan3010 |  VRF11  |  10.255.1.101/31  |  -  |  -  |  -  |  -  |
 | Vlan3011 |  VRF12  |  10.255.1.101/31  |  -  |  -  |  -  |  -  |
-| Vlan3012 |  hrvrf  |  10.255.1.101/31  |  -  |  -  |  -  |  -  |
 | Vlan4093 |  default  |  10.255.1.101/31  |  -  |  -  |  -  |  -  |
 | Vlan4094 |  default  |  10.255.1.69/31  |  -  |  -  |  -  |  -  |
 
@@ -524,28 +578,22 @@ interface Vlan22
    vrf VRF11
    ip address virtual 10.10.22.1/24
 !
-interface Vlan23
-   description VRF11_VLAN23
-   no shutdown
-   vrf VRF11
-   ip address 10.10.23.1/24
-!
 interface Vlan31
    description VRF12_VLAN31
    no shutdown
    vrf VRF12
    ip address 10.10.31.1/24
 !
-interface Vlan32
-   description VRF12_VLAN32
+interface Vlan45
+   description VRF12_VLAN45
    no shutdown
    vrf VRF12
-   ip address 10.10.32.1/24
+   ip address 10.10.45.1/24
 !
 interface Vlan50
-   description hr-50
+   description vlan_50
    no shutdown
-   vrf hrvrf
+   vrf VRF10
    ip address 10.10.50.1/24
 !
 interface Vlan60
@@ -553,6 +601,12 @@ interface Vlan60
    no shutdown
    vrf VRF11
    ip address 10.10.60.1/24
+!
+interface Vlan300
+   description vlan_300
+   no shutdown
+   vrf VRF10
+   ip address 10.30.10.1/24
 !
 interface Vlan3009
    description MLAG_L3_VRF_VRF10
@@ -573,13 +627,6 @@ interface Vlan3011
    no shutdown
    mtu 1500
    vrf VRF12
-   ip address 10.255.1.101/31
-!
-interface Vlan3012
-   description MLAG_L3_VRF_hrvrf
-   no shutdown
-   mtu 1500
-   vrf hrvrf
    ip address 10.255.1.101/31
 !
 interface Vlan4093
@@ -616,11 +663,11 @@ interface Vlan4094
 | 15 | 10015 | - | - |
 | 21 | 10021 | - | - |
 | 22 | 10022 | - | - |
-| 23 | 10023 | - | - |
 | 31 | 10031 | - | - |
-| 32 | 10032 | - | - |
+| 45 | 10045 | - | - |
 | 50 | 10050 | - | - |
 | 60 | 10060 | - | - |
+| 300 | 10300 | - | - |
 | 3401 | 13401 | - | - |
 | 3402 | 13402 | - | - |
 
@@ -628,7 +675,6 @@ interface Vlan4094
 
 | VRF | VNI | Multicast Group |
 | ---- | --- | --------------- |
-| hrvrf | 13 | - |
 | VRF10 | 10 | - |
 | VRF11 | 11 | - |
 | VRF12 | 12 | - |
@@ -648,14 +694,13 @@ interface Vxlan1
    vxlan vlan 15 vni 10015
    vxlan vlan 21 vni 10021
    vxlan vlan 22 vni 10022
-   vxlan vlan 23 vni 10023
    vxlan vlan 31 vni 10031
-   vxlan vlan 32 vni 10032
+   vxlan vlan 45 vni 10045
    vxlan vlan 50 vni 10050
    vxlan vlan 60 vni 10060
+   vxlan vlan 300 vni 10300
    vxlan vlan 3401 vni 13401
    vxlan vlan 3402 vni 13402
-   vxlan vrf hrvrf vni 13
    vxlan vrf VRF10 vni 10
    vxlan vrf VRF11 vni 11
    vxlan vrf VRF12 vni 12
@@ -692,7 +737,6 @@ ip virtual-router mac-address 00:1c:73:00:00:99
 | VRF | Routing Enabled |
 | --- | --------------- |
 | default | True |
-| hrvrf | True |
 | VRF10 | True |
 | VRF11 | True |
 | VRF12 | True |
@@ -702,7 +746,6 @@ ip virtual-router mac-address 00:1c:73:00:00:99
 ```eos
 !
 ip routing
-ip routing vrf hrvrf
 ip routing vrf VRF10
 ip routing vrf VRF11
 ip routing vrf VRF12
@@ -716,7 +759,6 @@ ip routing vrf VRF12
 | --- | --------------- |
 | default | False |
 | default | false |
-| hrvrf | false |
 | VRF10 | false |
 | VRF11 | false |
 | VRF12 | false |
@@ -791,7 +833,6 @@ ASN Notation: asplain
 | 10.255.1.100 | Inherited from peer group MLAG-IPv4-UNDERLAY-PEER | default | - | Inherited from peer group MLAG-IPv4-UNDERLAY-PEER | Inherited from peer group MLAG-IPv4-UNDERLAY-PEER | - | - | - | - | - | - |
 | 10.255.255.12 | 65100 | default | - | Inherited from peer group IPv4-UNDERLAY-PEERS | Inherited from peer group IPv4-UNDERLAY-PEERS | - | - | - | - | - | - |
 | 10.255.255.14 | 65100 | default | - | Inherited from peer group IPv4-UNDERLAY-PEERS | Inherited from peer group IPv4-UNDERLAY-PEERS | - | - | - | - | - | - |
-| 10.255.1.100 | Inherited from peer group MLAG-IPv4-UNDERLAY-PEER | hrvrf | - | Inherited from peer group MLAG-IPv4-UNDERLAY-PEER | Inherited from peer group MLAG-IPv4-UNDERLAY-PEER | - | - | - | - | - | - |
 | 10.255.1.100 | Inherited from peer group MLAG-IPv4-UNDERLAY-PEER | VRF10 | - | Inherited from peer group MLAG-IPv4-UNDERLAY-PEER | Inherited from peer group MLAG-IPv4-UNDERLAY-PEER | - | - | - | - | - | - |
 | 192.168.5.6 | 64512 | VRF10 | - | - | - | - | - | - | - | - | - |
 | 10.255.1.100 | Inherited from peer group MLAG-IPv4-UNDERLAY-PEER | VRF11 | - | Inherited from peer group MLAG-IPv4-UNDERLAY-PEER | Inherited from peer group MLAG-IPv4-UNDERLAY-PEER | - | - | - | - | - | - |
@@ -815,11 +856,11 @@ ASN Notation: asplain
 | 15 | 10.255.0.6:10015 | 10015:10015 | - | - | learned |
 | 21 | 10.255.0.6:10021 | 10021:10021 | - | - | learned |
 | 22 | 10.255.0.6:10022 | 10022:10022 | - | - | learned |
-| 23 | 10.255.0.6:10023 | 10023:10023 | - | - | learned |
 | 31 | 10.255.0.6:10031 | 10031:10031 | - | - | learned |
-| 32 | 10.255.0.6:10032 | 10032:10032 | - | - | learned |
+| 45 | 10.255.0.6:10045 | 10045:10045 | - | - | learned |
 | 50 | 10.255.0.6:10050 | 10050:10050 | - | - | learned |
 | 60 | 10.255.0.6:10060 | 10060:10060 | - | - | learned |
+| 300 | 10.255.0.6:10300 | 10300:10300 | - | - | learned |
 | 3401 | 10.255.0.6:13401 | 13401:13401 | - | - | learned |
 | 3402 | 10.255.0.6:13402 | 13402:13402 | - | - | learned |
 
@@ -827,7 +868,6 @@ ASN Notation: asplain
 
 | VRF | Route-Distinguisher | Redistribute | Graceful Restart |
 | --- | ------------------- | ------------ | ---------------- |
-| hrvrf | 10.255.0.6:13 | connected | - |
 | VRF10 | 10.255.0.6:10 | connected | - |
 | VRF11 | 10.255.0.6:11 | connected | - |
 | VRF12 | 10.255.0.6:12 | connected | - |
@@ -902,19 +942,14 @@ router bgp 65102
       route-target both 10022:10022
       redistribute learned
    !
-   vlan 23
-      rd 10.255.0.6:10023
-      route-target both 10023:10023
-      redistribute learned
-   !
    vlan 31
       rd 10.255.0.6:10031
       route-target both 10031:10031
       redistribute learned
    !
-   vlan 32
-      rd 10.255.0.6:10032
-      route-target both 10032:10032
+   vlan 45
+      rd 10.255.0.6:10045
+      route-target both 10045:10045
       redistribute learned
    !
    vlan 50
@@ -925,6 +960,11 @@ router bgp 65102
    vlan 60
       rd 10.255.0.6:10060
       route-target both 10060:10060
+      redistribute learned
+   !
+   vlan 300
+      rd 10.255.0.6:10300
+      route-target both 10300:10300
       redistribute learned
    !
    vlan 3401
@@ -944,15 +984,6 @@ router bgp 65102
       no neighbor EVPN-OVERLAY-PEERS activate
       neighbor IPv4-UNDERLAY-PEERS activate
       neighbor MLAG-IPv4-UNDERLAY-PEER activate
-   !
-   vrf hrvrf
-      rd 10.255.0.6:13
-      route-target import evpn 13:13
-      route-target export evpn 13:13
-      router-id 10.255.0.6
-      neighbor 10.255.1.100 peer group MLAG-IPv4-UNDERLAY-PEER
-      neighbor 10.255.1.100 description dc1-leaf2a_Vlan3012
-      redistribute connected route-map RM-CONN-2-BGP-VRFS
    !
    vrf VRF10
       rd 10.255.0.6:10
@@ -1095,7 +1126,6 @@ route-map RM-MLAG-PEER-IN permit 10
 
 | VRF Name | IP Routing |
 | -------- | ---------- |
-| hrvrf | enabled |
 | VRF10 | enabled |
 | VRF11 | enabled |
 | VRF12 | enabled |
@@ -1103,8 +1133,6 @@ route-map RM-MLAG-PEER-IN permit 10
 ### VRF Instances Device Configuration
 
 ```eos
-!
-vrf instance hrvrf
 !
 vrf instance VRF10
 !

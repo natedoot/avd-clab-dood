@@ -108,7 +108,7 @@ This builds the configurations using Arista Validated Designs (AVD) based on the
 $ ansible-playbook playbooks/deploy-eapi.yml
 ```
 
-> **Note**: The `app.py` script is a Flask-based demo used to show how AVD group\_vars can be dynamically updated to add network services. It is not used to generate the configurations.
+> **Note**: To deploy using CV, export your onboarding token ```bash export LICENSE_FILE_PATH=/cv-onboarding-token.tok```
 
 ---
 

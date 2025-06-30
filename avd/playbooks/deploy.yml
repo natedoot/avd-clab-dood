@@ -1,0 +1,15 @@
+---
+
+- name: Deploy Configs
+  hosts: FABRIC
+  connection: local
+  gather_facts: false
+  tasks:
+    - name: Deploy configurations and tags to CloudVision
+      ansible.builtin.import_role:
+        name: arista.avd.cv_deploy
+      vars:
+        cv_skip_missing_devices: true
+        cv_verify_certs: false
+        cv_server: www.cv-staging.corp.arista.io
+        cv_token: eyJhbGciOiJFUzI1NiIsInR5cCI6IkpXVCJ9.eyJkaWQiOjQyOTk0NzYzMTQsImRzbiI6ImFuc2libGVfc3ZjIiwiZHN0IjoiYWNjb3VudCIsImV4cCI6MTc4Mjc5MTk5OSwiaWF0IjoxNzUxMDM5NTI2LCJvZ2kiOjQyOTkzODAzNTQsIm9nbiI6Im5zaGF3LWxhYiIsInNpZCI6IjgxMDg2MTJhODJjOTU3OGY1NzYzNDhhY2VhMzQyN2EwZmE2OTdmMTYxNWRlNzhjYmZmYjgwMWE2ZTYwNmQwYjUtaHlXeGI1OXNZMS1LY2Q4WHdBYkFMc243OHF2NG9rR1ZBMS1FWE5rTiJ9.yt6rynkqo65238Q-g7sDgudsoQNJxFC5XANABEXhV7QWrbBqmRr11vtg9Yj9EtgdAS_ZIyb9Ri2ixeURDFzm8Q

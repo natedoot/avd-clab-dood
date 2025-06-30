@@ -21,7 +21,13 @@ fabric_name: FABRIC
 # Define underlay and overlay routing protocol to be used
 underlay_routing_protocol: ebgp
 overlay_routing_protocol: ebgp
+name_servers:
+  - 8.8.8.8
 
+ntp_settings:
+  servers:
+    - name: pool.ntp.org
+      iburst: true
 # BGP peer groups passwords
 # bgp_peer_groups:
 #   # all passwords set to "arista"
@@ -50,8 +56,8 @@ default_interfaces:
     downlink_interfaces: [ Ethernet8 ]
 
 # CloudVision Portal definitions
-# cvp_instance_ips:
-#   - 192.168.0.5
+cvp_instance_ips:
+   - apiserver.cv-staging.corp.arista.io
 # terminattr_smashexcludes: "ale,flexCounter,hardware,kni,pulse,strata"
 # terminattr_ingestexclude: "/Sysdb/cell/1/agent,/Sysdb/cell/2/agent"
 # terminattr_disable_aaa: true

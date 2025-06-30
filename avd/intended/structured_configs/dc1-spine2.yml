@@ -4,6 +4,16 @@ aaa_authorization:
 aaa_root:
   disabled: true
 config_end: true
+daemon_terminattr:
+  cvaddrs:
+  - apiserver.cv-staging.corp.arista.io:443
+  cvauth:
+    method: token-secure
+    token_file: /tmp/cv-onboarding-token
+  cvvrf: default
+  disable_aaa: false
+  ingestexclude: /Sysdb/cell/1/agent,/Sysdb/cell/2/agent
+  smashexcludes: ale,flexCounter,hardware,kni,pulse,strata
 enable_password:
   disabled: true
 ethernet_interfaces:
@@ -68,6 +78,9 @@ ethernet_interfaces:
   switchport:
     enabled: false
 hostname: dc1-spine2
+ip_name_servers:
+- ip_address: 8.8.8.8
+  vrf: default
 ip_routing: true
 is_deployed: true
 local_users:
@@ -99,6 +112,15 @@ management_interfaces:
 metadata:
   platform: ceos
   fabric_name: FABRIC
+ntp:
+  local_interface:
+    name: Management0
+    vrf: default
+  servers:
+  - name: pool.ntp.org
+    iburst: true
+    preferred: true
+    vrf: default
 prefix_lists:
 - name: PL-LOOPBACKS-EVPN-OVERLAY
   sequence_numbers:

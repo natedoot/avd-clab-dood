@@ -23,6 +23,14 @@ tenant-a:
       name: VRF10_VLAN15
       ip_address: 10.10.15.1/24
       enabled: true
+    - id: 300
+      name: vlan_300
+      ip_address: 10.30.10.1/24
+      enabled: true
+    - id: 50
+      name: vlan_50
+      ip_address: 10.10.50.1/24
+      enabled: true
   - name: VRF11
     vrf_vni: 11
     vtep_diagnostic:
@@ -48,37 +56,13 @@ tenant-a:
       name: VRF12_VLAN31
       ip_address: 10.10.31.1/24
       enabled: true
+    - id: 45
+      name: VRF12_VLAN45
+      ip_address: 10.10.45.1/24
+      enabled: true
+  
   l2vlans:
   - id: 3401
     name: L2_VLAN3401
   - id: 3402
     name: L2_VLAN3402
-tenant-b:
-- name: TENANT-B
-  mac_vrf_vni_base: 10000
-  vrfs:
-  - name: VRF12
-    vrf_vni: 12
-    svis:
-    - id: 32
-      name: VRF12_VLAN32
-      ip_address: 10.10.32.1/24
-      enabled: true
-hr:
-- name: hr
-  mac_vrf_vni_base: 10000
-  vrfs:
-  - name: hrvrf
-    vrf_vni: 13
-    svis:
-    - id: 50
-      name: hr-50
-      ip_address: 10.10.50.1/24
-      enabled: true
-  - name: VRF11
-    vrf_vni: 11
-    svis:
-    - id: 23
-      name: VRF11_VLAN23
-      ip_address: 10.10.23.1/24
-      enabled: true

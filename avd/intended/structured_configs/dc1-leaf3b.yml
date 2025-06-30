@@ -4,6 +4,16 @@ aaa_authorization:
 aaa_root:
   disabled: true
 config_end: true
+daemon_terminattr:
+  cvaddrs:
+  - apiserver.cv-staging.corp.arista.io:443
+  cvauth:
+    method: token-secure
+    token_file: /tmp/cv-onboarding-token
+  cvvrf: default
+  disable_aaa: false
+  ingestexclude: /Sysdb/cell/1/agent,/Sysdb/cell/2/agent
+  smashexcludes: ale,flexCounter,hardware,kni,pulse,strata
 enable_password:
   disabled: true
 ethernet_interfaces:
@@ -48,6 +58,9 @@ ethernet_interfaces:
 hostname: dc1-leaf3b
 ip_igmp_snooping:
   globally_enabled: true
+ip_name_servers:
+- ip_address: 8.8.8.8
+  vrf: default
 ip_routing: true
 ip_virtual_router_mac_address: 00:1c:73:00:00:99
 is_deployed: true
@@ -101,6 +114,15 @@ mlag_configuration:
   peer_link: Port-Channel3
   reload_delay_mlag: '300'
   reload_delay_non_mlag: '330'
+ntp:
+  local_interface:
+    name: Management0
+    vrf: default
+  servers:
+  - name: pool.ntp.org
+    iburst: true
+    preferred: true
+    vrf: default
 port_channel_interfaces:
 - name: Port-Channel3
   description: MLAG_dc1-leaf3a_Port-Channel3
@@ -208,22 +230,6 @@ router_bgp:
       enabled: true
       route_map: RM-CONN-2-BGP
   vlans:
-  - id: 50
-    tenant: hr
-    rd: 10.255.0.8:10050
-    route_targets:
-      both:
-      - 10050:10050
-    redistribute_routes:
-    - learned
-  - id: 23
-    tenant: hr
-    rd: 10.255.0.8:10023
-    route_targets:
-      both:
-      - 10023:10023
-    redistribute_routes:
-    - learned
   - id: 5
     tenant: TENANT-A
     rd: 10.255.0.8:10005
@@ -254,6 +260,22 @@ router_bgp:
     route_targets:
       both:
       - 10015:10015
+    redistribute_routes:
+    - learned
+  - id: 50
+    tenant: TENANT-A
+    rd: 10.255.0.8:10050
+    route_targets:
+      both:
+      - 10050:10050
+    redistribute_routes:
+    - learned
+  - id: 300
+    tenant: TENANT-A
+    rd: 10.255.0.8:10300
+    route_targets:
+      both:
+      - 10300:10300
     redistribute_routes:
     - learned
   - id: 21
@@ -288,6 +310,14 @@ router_bgp:
       - 10031:10031
     redistribute_routes:
     - learned
+  - id: 45
+    tenant: TENANT-A
+    rd: 10.255.0.8:10045
+    route_targets:
+      both:
+      - 10045:10045
+    redistribute_routes:
+    - learned
   - id: 3401
     tenant: TENANT-A
     rd: 10.255.0.8:13401
@@ -304,14 +334,6 @@ router_bgp:
       - 13402:13402
     redistribute_routes:
     - learned
-  - id: 32
-    tenant: TENANT-B
-    rd: 10.255.0.8:10032
-    route_targets:
-      both:
-      - 10032:10032
-    redistribute_routes:
-    - learned
   address_family_evpn:
     peer_groups:
     - name: EVPN-OVERLAY-PEERS
@@ -325,22 +347,22 @@ router_bgp:
     - name: EVPN-OVERLAY-PEERS
       activate: false
   vrfs:
-  - name: hrvrf
-    rd: 10.255.0.8:13
+  - name: VRF10
+    rd: 10.255.0.8:10
     route_targets:
       import:
       - address_family: evpn
         route_targets:
-        - '13:13'
+        - '10:10'
       export:
       - address_family: evpn
         route_targets:
-        - '13:13'
+        - '10:10'
     router_id: 10.255.0.8
     neighbors:
     - ip_address: 10.255.1.104
       peer_group: MLAG-IPv4-UNDERLAY-PEER
-      description: dc1-leaf3a_Vlan3012
+      description: dc1-leaf3a_Vlan3009
     redistribute:
       connected:
         enabled: true
@@ -361,26 +383,6 @@ router_bgp:
     - ip_address: 10.255.1.104
       peer_group: MLAG-IPv4-UNDERLAY-PEER
       description: dc1-leaf3a_Vlan3010
-    redistribute:
-      connected:
-        enabled: true
-        route_map: RM-CONN-2-BGP-VRFS
-  - name: VRF10
-    rd: 10.255.0.8:10
-    route_targets:
-      import:
-      - address_family: evpn
-        route_targets:
-        - '10:10'
-      export:
-      - address_family: evpn
-        route_targets:
-        - '10:10'
-    router_id: 10.255.0.8
-    neighbors:
-    - ip_address: 10.255.1.104
-      peer_group: MLAG-IPv4-UNDERLAY-PEER
-      description: dc1-leaf3a_Vlan3009
     redistribute:
       connected:
         enabled: true
@@ -434,34 +436,6 @@ vlan_interfaces:
   ip_address: 10.255.1.73/31
   mtu: 1500
   no_autostate: true
-- name: Vlan50
-  description: hr-50
-  shutdown: false
-  vrf: hrvrf
-  ip_address: 10.10.50.1/24
-  tenant: hr
-- name: Vlan3012
-  description: MLAG_L3_VRF_hrvrf
-  shutdown: false
-  vrf: hrvrf
-  ip_address: 10.255.1.105/31
-  mtu: 1500
-  tenant: hr
-  type: underlay_peering
-- name: Vlan23
-  description: VRF11_VLAN23
-  shutdown: false
-  vrf: VRF11
-  ip_address: 10.10.23.1/24
-  tenant: hr
-- name: Vlan3010
-  description: MLAG_L3_VRF_VRF11
-  shutdown: false
-  vrf: VRF11
-  ip_address: 10.255.1.105/31
-  mtu: 1500
-  tenant: hr
-  type: underlay_peering
 - name: Vlan5
   description: '5'
   shutdown: true
@@ -485,6 +459,18 @@ vlan_interfaces:
   shutdown: false
   vrf: VRF10
   ip_address: 10.10.15.1/24
+  tenant: TENANT-A
+- name: Vlan50
+  description: vlan_50
+  shutdown: false
+  vrf: VRF10
+  ip_address: 10.10.50.1/24
+  tenant: TENANT-A
+- name: Vlan300
+  description: vlan_300
+  shutdown: false
+  vrf: VRF10
+  ip_address: 10.30.10.1/24
   tenant: TENANT-A
 - name: Vlan3009
   description: MLAG_L3_VRF_VRF10
@@ -512,11 +498,25 @@ vlan_interfaces:
   vrf: VRF11
   ip_address: 10.10.60.1/24
   tenant: TENANT-A
+- name: Vlan3010
+  description: MLAG_L3_VRF_VRF11
+  shutdown: false
+  vrf: VRF11
+  ip_address: 10.255.1.105/31
+  mtu: 1500
+  tenant: TENANT-A
+  type: underlay_peering
 - name: Vlan31
   description: VRF12_VLAN31
   shutdown: false
   vrf: VRF12
   ip_address: 10.10.31.1/24
+  tenant: TENANT-A
+- name: Vlan45
+  description: VRF12_VLAN45
+  shutdown: false
+  vrf: VRF12
+  ip_address: 10.10.45.1/24
   tenant: TENANT-A
 - name: Vlan3011
   description: MLAG_L3_VRF_VRF12
@@ -526,12 +526,6 @@ vlan_interfaces:
   mtu: 1500
   tenant: TENANT-A
   type: underlay_peering
-- name: Vlan32
-  description: VRF12_VLAN32
-  shutdown: false
-  vrf: VRF12
-  ip_address: 10.10.32.1/24
-  tenant: TENANT-B
 vlan_internal_order:
   allocation: ascending
   range:
@@ -548,22 +542,6 @@ vlans:
   trunk_groups:
   - MLAG
   tenant: system
-- id: 50
-  name: hr-50
-  tenant: hr
-- id: 3012
-  name: MLAG_L3_VRF_hrvrf
-  trunk_groups:
-  - MLAG
-  tenant: hr
-- id: 23
-  name: VRF11_VLAN23
-  tenant: hr
-- id: 3010
-  name: MLAG_L3_VRF_VRF11
-  trunk_groups:
-  - MLAG
-  tenant: hr
 - id: 5
   name: '5'
   tenant: TENANT-A
@@ -575,6 +553,12 @@ vlans:
   tenant: TENANT-A
 - id: 15
   name: VRF10_VLAN15
+  tenant: TENANT-A
+- id: 50
+  name: vlan_50
+  tenant: TENANT-A
+- id: 300
+  name: vlan_300
   tenant: TENANT-A
 - id: 3009
   name: MLAG_L3_VRF_VRF10
@@ -590,8 +574,16 @@ vlans:
 - id: 60
   name: VRF11_VLAN60
   tenant: TENANT-A
+- id: 3010
+  name: MLAG_L3_VRF_VRF11
+  trunk_groups:
+  - MLAG
+  tenant: TENANT-A
 - id: 31
   name: VRF12_VLAN31
+  tenant: TENANT-A
+- id: 45
+  name: VRF12_VLAN45
   tenant: TENANT-A
 - id: 3011
   name: MLAG_L3_VRF_VRF12
@@ -604,19 +596,13 @@ vlans:
 - id: 3402
   name: L2_VLAN3402
   tenant: TENANT-A
-- id: 32
-  name: VRF12_VLAN32
-  tenant: TENANT-B
 vrfs:
 - name: default
   ip_routing: false
-- name: hrvrf
-  ip_routing: true
-  tenant: hr
-- name: VRF11
-  ip_routing: true
-  tenant: hr
 - name: VRF10
+  ip_routing: true
+  tenant: TENANT-A
+- name: VRF11
   ip_routing: true
   tenant: TENANT-A
 - name: VRF12
@@ -630,10 +616,6 @@ vxlan_interface:
       udp_port: 4789
       virtual_router_encapsulation_mac_address: mlag-system-id
       vlans:
-      - id: 50
-        vni: 10050
-      - id: 23
-        vni: 10023
       - id: 5
         vni: 10005
       - id: 11
@@ -642,6 +624,10 @@ vxlan_interface:
         vni: 10012
       - id: 15
         vni: 10015
+      - id: 50
+        vni: 10050
+      - id: 300
+        vni: 10300
       - id: 21
         vni: 10021
       - id: 22
@@ -650,18 +636,16 @@ vxlan_interface:
         vni: 10060
       - id: 31
         vni: 10031
+      - id: 45
+        vni: 10045
       - id: 3401
         vni: 13401
       - id: 3402
         vni: 13402
-      - id: 32
-        vni: 10032
       vrfs:
-      - name: hrvrf
-        vni: 13
-      - name: VRF11
-        vni: 11
       - name: VRF10
         vni: 10
+      - name: VRF11
+        vni: 11
       - name: VRF12
         vni: 12
