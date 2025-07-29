@@ -1,0 +1,66 @@
+---
+- name: Manage Arista EOS EVPN/VXLAN Configuration
+  hosts: ATD_FABRIC
+  connection: local
+  gather_facts: false
+  collections:
+    - arista.avd
+  vars:
+    fabric_dir_name: "{{ fabric_name }}"
+
+  tasks:
+    - name: Retrieve a repository from a distant location and make it available to the local EE
+      ansible.scm.git_retrieve:
+        origin:
+          url: "https://github.com/ramzihusein/atd-avd.git"
+        parent_directory: /tmp/
+        branch:
+          name: master
+          duplicate_detection: no
+      register: repository
+      delegate_to: localhost
+      run_once: true
+
+    - name: Generate intended variables
+      include_role:
+        name: eos_designs
+
+    - name: Generate device intended config and documentation
+      include_role:
+        name: eos_cli_config_gen
+
+    - name: copy
+      ansible.builtin.copy:
+        dest: '{{ item.dest }}'
+        src: '{{ item.src }}'
+        force: true
+      delegate_to: localhost
+      run_once: true
+      loop:
+       - dest: /tmp/atd-avd/atd-inventory/intended/
+         src:  /runner/inventory/intended/structured_configs
+       - dest: /tmp/atd-avd/atd-inventory/intended/
+         src:  /runner/inventory/intended/configs
+       - dest: /tmp/atd-avd/atd-inventory/documentation/
+         src:  /runner/inventory/documentation/ATD_FABRIC
+
+    - name: Publish the changes
+      ansible.scm.git_publish:
+        path: "{{ repository['path'] }}"
+        token: "{{ password }}"
+        user:
+          name: "{{ username }}"
+          email: "{{ email }}"
+      delegate_to: localhost
+      run_once: true
+   
+    - name: Provision CV with AVD configuration
+      include_role:
+        name: cv_deploy
+      vars:
+        cv_server: www.cv-prod-us-central1-c.arista.io
+        cv_token: "{{ lab_token }}"
+        cv_run_change_control: true
+ 
+
+    

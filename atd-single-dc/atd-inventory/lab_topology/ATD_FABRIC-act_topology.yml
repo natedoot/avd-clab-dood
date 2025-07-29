@@ -1,0 +1,80 @@
+
+
+# Global parameters for different node types
+veos:
+  username: cvpadmin
+  password: arista123
+  version: 4.33.2F
+  intenert_acces: true
+
+tools-server:
+  username: ansible
+  password: arista123
+  version: ubuntu-2204-lts
+
+# List of ACT nodes
+nodes:
+  - s1-leaf1:
+      ip_addr: 192.168.0.12
+      node_type: veos
+      version: 4.33.2F
+  - s1-leaf2:
+      ip_addr: 192.168.0.13
+      node_type: veos
+      version: 4.33.2F
+  - s1-leaf3:
+      ip_addr: 192.168.0.14
+      node_type: veos
+      version: 4.33.2F
+  - s1-leaf4:
+      ip_addr: 192.168.0.15
+      node_type: veos
+      version: 4.33.2F
+  - s1-spine1:
+      ip_addr: 192.168.0.10
+      node_type: veos
+      version: 4.33.2F
+  - s1-spine2:
+      ip_addr: 192.168.0.11
+      node_type: veos
+      version: 4.33.2F
+  - tool-server:
+      ip_addr: 192.168.0.6
+      node_type: generic
+links:
+    - connection:
+        - s1-leaf1:Ethernet1
+        - s1-leaf2:Ethernet1
+    - connection:
+        - s1-leaf1:Ethernet2
+        - s1-spine1:Ethernet2
+    - connection:
+        - s1-leaf1:Ethernet3
+        - s1-spine2:Ethernet2
+    - connection:
+        - s1-leaf1:Ethernet6
+        - s1-leaf2:Ethernet6
+    - connection:
+        - s1-leaf2:Ethernet2
+        - s1-spine1:Ethernet3
+    - connection:
+        - s1-leaf2:Ethernet3
+        - s1-spine2:Ethernet3
+    - connection:
+        - s1-leaf3:Ethernet1
+        - s1-leaf4:Ethernet1
+    - connection:
+        - s1-leaf3:Ethernet2
+        - s1-spine1:Ethernet4
+    - connection:
+        - s1-leaf3:Ethernet3
+        - s1-spine2:Ethernet4
+    - connection:
+        - s1-leaf3:Ethernet6
+        - s1-leaf4:Ethernet6
+    - connection:
+        - s1-leaf4:Ethernet2
+        - s1-spine1:Ethernet5
+    - connection:
+        - s1-leaf4:Ethernet3
+        - s1-spine2:Ethernet5

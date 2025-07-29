@@ -1,0 +1,18 @@
+---
+- name: "Run Fabric states validation"
+  hosts: ATD_FABRIC
+  connection: local
+  gather_facts: false
+  collections:
+    - arista.avd
+  vars:
+   ansible_user: arista
+   ansible_password: aristaf721
+  tasks:
+
+    - name: Deploy configuration to device
+      import_role:
+        name: eos_validate_state
+      vars:
+        use_anta: true
+        save_catalog: true
