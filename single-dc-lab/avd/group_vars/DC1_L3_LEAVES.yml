@@ -1,2 +1,5 @@
 ---
 type: l3leaf
+
+custom_templates:
+  - anycast-rp.j2

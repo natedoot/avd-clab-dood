@@ -1,4 +1,4 @@
-- name: "onbaord with cert"
+- name: "add cert"
   hosts: all
   connection: local
   gather_facts: false
@@ -13,15 +13,11 @@
   tasks:
     - name: Copy CV onboarding token
       net_put:
-          src: "{{ lookup('env', 'LICENSE_FILE_PATH') }}"
-          dest: "/tmp/cv-onboarding-token"
+          src: "./xyz.crt"
+          dest: "/tmp/xyz.crt"
           
     - name: shut no shut terminattr
       arista.eos.eos_command:
         commands:
           - command: "enable"
-          - command: "conf"
-          - command: "daemon TerminAttr"
-          - command: "shutdown"
-          - command: "no shutdown"
-
+          - command: "copy file:/tmp/xyz.crt certificate:xyz.crt"
