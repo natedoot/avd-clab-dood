@@ -1,7 +1,9 @@
+{% if hostname == "dc1-leaf1a" or hostname == "dc1-leaf1b" %}
 router pim sparse-mode
    vrf Prod
       ipv4
          anycast-rp 10.255.245.10 1.1.1.1
          anycast-rp 10.255.245.10 1.1.1.2
+{% endif %}
          
 
