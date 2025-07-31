@@ -4,6 +4,14 @@
 - name: Build Configurations and Documentation # (1)!
   hosts: FABRIC
   gather_facts: false
+
+  vars:
+    # Adjust the output dirs to keep Digital Twin artifacts in a separate directory
+    output_dir_name: "digital_twin/intended"
+    documentation_dir_name: "digital_twin/documentation"
+    # Set this flag to True to enable Digital Twin mode
+    avd_digital_twin_mode: true
+    
   tasks:
 
     - name: Generate AVD Structured Configurations and Fabric Documentation # (2)!

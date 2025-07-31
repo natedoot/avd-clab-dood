@@ -38,7 +38,7 @@
 
 
 - name: Onboard devices to CVaaS
-  hosts: ATD_LAB                                   # Change to your value from inventory file
+  hosts: FABRIC                                  # Change to your value from inventory file
   gather_facts: false
   vars:
     ansible_user: arista                     # Change to a valid username on EOS devices
