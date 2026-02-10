@@ -1,0 +1,5 @@
+anta.tests.interfaces:
+  - VerifyIPProxyARP:
+      interfaces:
+        - Ethernet1
+        - Ethernet2
