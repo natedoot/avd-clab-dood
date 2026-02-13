@@ -1,9 +1,1 @@
 Device,Test Name,Test Status,Message(s),Test description,Test category
-dc1-leaf1a,VerifyIPProxyARP,failure,Interface: Ethernet1 - Proxy-ARP disabled - Interface: Ethernet2 - Proxy-ARP disabled,Verifies if Proxy ARP is enabled.,Interfaces
-dc1-leaf1b,VerifyIPProxyARP,failure,Interface: Ethernet1 - Proxy-ARP disabled - Interface: Ethernet2 - Proxy-ARP disabled,Verifies if Proxy ARP is enabled.,Interfaces
-dc1-leaf2a,VerifyIPProxyARP,failure,Interface: Ethernet1 - Proxy-ARP disabled - Interface: Ethernet2 - Proxy-ARP disabled,Verifies if Proxy ARP is enabled.,Interfaces
-dc1-leaf2b,VerifyIPProxyARP,failure,Interface: Ethernet1 - Proxy-ARP disabled - Interface: Ethernet2 - Proxy-ARP disabled,Verifies if Proxy ARP is enabled.,Interfaces
-dc1-leaf3a,VerifyIPProxyARP,failure,Interface: Ethernet1 - Proxy-ARP disabled - Interface: Ethernet2 - Proxy-ARP disabled,Verifies if Proxy ARP is enabled.,Interfaces
-dc1-leaf3b,VerifyIPProxyARP,failure,Interface: Ethernet1 - Proxy-ARP disabled - Interface: Ethernet2 - Proxy-ARP disabled,Verifies if Proxy ARP is enabled.,Interfaces
-dc1-spine1,VerifyIPProxyARP,failure,Interface: Ethernet1 - Proxy-ARP disabled - Interface: Ethernet2 - Proxy-ARP disabled,Verifies if Proxy ARP is enabled.,Interfaces
-dc1-spine2,VerifyIPProxyARP,failure,Interface: Ethernet1 - Proxy-ARP disabled - Interface: Ethernet2 - Proxy-ARP disabled,Verifies if Proxy ARP is enabled.,Interfaces

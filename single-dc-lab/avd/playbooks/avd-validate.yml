@@ -23,5 +23,3 @@
     - name: validate using anta_runner
       ansible.builtin.import_role:
         name: arista.avd.anta_runner
-      vars:
-        avd_catalogs_enabled: false

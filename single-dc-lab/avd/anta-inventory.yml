@@ -1,0 +1,18 @@
+anta_inventory:
+  hosts:
+  - host: 192.168.0.101
+    name: dc1-spine1
+  - host: 192.168.0.102
+    name: dc1-spine2
+  - host: 192.168.0.103
+    name: dc1-leaf1a
+  - host: 192.168.0.104
+    name: dc1-leaf1b
+  - host: 192.168.0.105
+    name: dc1-leaf2a
+  - host: 192.168.0.106
+    name: dc1-leaf2b
+  - host: 192.168.0.107
+    name: dc1-leaf3a
+  - host: 192.168.0.108
+    name: dc1-leaf3b

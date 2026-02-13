@@ -1,4 +1,4 @@
-# ANTA Report
+# 📊 ANTA Report <a id="anta-report"></a>
 
 **Table of Contents:**
 
@@ -9,42 +9,25 @@
     - [Summary Totals Per Category](#summary-totals-per-category)
   - [Test Results](#test-results)
 
-## Test Results Summary
+## 📉 Test Results Summary <a id="test-results-summary"></a>
 
-### Summary Totals
+### 🔢 Summary Totals <a id="summary-totals"></a>
 
-| Total Tests | Total Tests Success | Total Tests Skipped | Total Tests Failure | Total Tests Error |
-| ----------- | ------------------- | ------------------- | ------------------- | ------------------|
-| 8 | 0 | 0 | 8 | 0 |
+| Total Tests | ✅&nbsp;Success | ⏭️&nbsp;Skipped | ❌&nbsp;Failure | ❗&nbsp;Error |
+| :- | :- | :- | :- | :- |
+| 0 | 0 | 0 | 0 | 0 |
 
-### Summary Totals Device Under Test
+### 🔌 Summary Totals Device Under Test <a id="summary-totals-device-under-test"></a>
 
-| Device Under Test | Total Tests | Tests Success | Tests Skipped | Tests Failure | Tests Error | Categories Skipped | Categories Failed |
-| ------------------| ----------- | ------------- | ------------- | ------------- | ----------- | -------------------| ------------------|
-| dc1-leaf1a | 1 | 0 | 0 | 1 | 0 | - | Interfaces |
-| dc1-leaf1b | 1 | 0 | 0 | 1 | 0 | - | Interfaces |
-| dc1-leaf2a | 1 | 0 | 0 | 1 | 0 | - | Interfaces |
-| dc1-leaf2b | 1 | 0 | 0 | 1 | 0 | - | Interfaces |
-| dc1-leaf3a | 1 | 0 | 0 | 1 | 0 | - | Interfaces |
-| dc1-leaf3b | 1 | 0 | 0 | 1 | 0 | - | Interfaces |
-| dc1-spine1 | 1 | 0 | 0 | 1 | 0 | - | Interfaces |
-| dc1-spine2 | 1 | 0 | 0 | 1 | 0 | - | Interfaces |
+| Device | Total Tests | ✅&nbsp;Success | ⏭️&nbsp;Skipped | ❌&nbsp;Failure | ❗&nbsp;Error | Categories Skipped | Categories Failed |
+| :- | :- | :- | :- | :- | :- | :- | :- |
 
-### Summary Totals Per Category
+### 🗂️ Summary Totals Per Category <a id="summary-totals-per-category"></a>
 
-| Test Category | Total Tests | Tests Success | Tests Skipped | Tests Failure | Tests Error |
-| ------------- | ----------- | ------------- | ------------- | ------------- | ----------- |
-| Interfaces | 8 | 0 | 0 | 8 | 0 |
+| Test Category | Total Tests | ✅&nbsp;Success | ⏭️&nbsp;Skipped | ❌&nbsp;Failure | ❗&nbsp;Error |
+| :- | :- | :- | :- | :- | :- |
 
-## Test Results
+## 🧪 Test Results <a id="test-results"></a>
 
-| Device Under Test | Categories | Test | Description | Custom Field | Result | Messages |
-| ----------------- | ---------- | ---- | ----------- | ------------ | ------ | -------- |
-| dc1-leaf1a | Interfaces | VerifyIPProxyARP | Verifies if Proxy ARP is enabled. | - | failure | Interface: Ethernet1 - Proxy-ARP disabled<br>Interface: Ethernet2 - Proxy-ARP disabled |
-| dc1-leaf1b | Interfaces | VerifyIPProxyARP | Verifies if Proxy ARP is enabled. | - | failure | Interface: Ethernet1 - Proxy-ARP disabled<br>Interface: Ethernet2 - Proxy-ARP disabled |
-| dc1-leaf2a | Interfaces | VerifyIPProxyARP | Verifies if Proxy ARP is enabled. | - | failure | Interface: Ethernet1 - Proxy-ARP disabled<br>Interface: Ethernet2 - Proxy-ARP disabled |
-| dc1-leaf2b | Interfaces | VerifyIPProxyARP | Verifies if Proxy ARP is enabled. | - | failure | Interface: Ethernet1 - Proxy-ARP disabled<br>Interface: Ethernet2 - Proxy-ARP disabled |
-| dc1-leaf3a | Interfaces | VerifyIPProxyARP | Verifies if Proxy ARP is enabled. | - | failure | Interface: Ethernet1 - Proxy-ARP disabled<br>Interface: Ethernet2 - Proxy-ARP disabled |
-| dc1-leaf3b | Interfaces | VerifyIPProxyARP | Verifies if Proxy ARP is enabled. | - | failure | Interface: Ethernet1 - Proxy-ARP disabled<br>Interface: Ethernet2 - Proxy-ARP disabled |
-| dc1-spine1 | Interfaces | VerifyIPProxyARP | Verifies if Proxy ARP is enabled. | - | failure | Interface: Ethernet1 - Proxy-ARP disabled<br>Interface: Ethernet2 - Proxy-ARP disabled |
-| dc1-spine2 | Interfaces | VerifyIPProxyARP | Verifies if Proxy ARP is enabled. | - | failure | Interface: Ethernet1 - Proxy-ARP disabled<br>Interface: Ethernet2 - Proxy-ARP disabled |
+| Device | Categories | Test | Description | Custom Field | Result | Messages |
+| :- | :- | :- | :- | :- | :- | :- |
