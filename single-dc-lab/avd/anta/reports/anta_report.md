@@ -15,19 +15,22 @@
 
 | Total Tests | ✅&nbsp;Success | ⏭️&nbsp;Skipped | ❌&nbsp;Failure | ❗&nbsp;Error |
 | :- | :- | :- | :- | :- |
-| 0 | 0 | 0 | 0 | 0 |
+| 1 | 0 | 0 | 1 | 0 |
 
 ### 🔌 Summary Totals Device Under Test <a id="summary-totals-device-under-test"></a>
 
 | Device | Total Tests | ✅&nbsp;Success | ⏭️&nbsp;Skipped | ❌&nbsp;Failure | ❗&nbsp;Error | Categories Skipped | Categories Failed |
 | :- | :- | :- | :- | :- | :- | :- | :- |
+| **dc1-leaf1a** | 1 | 0 | 0 | 1 | 0 | - | Interfaces |
 
 ### 🗂️ Summary Totals Per Category <a id="summary-totals-per-category"></a>
 
 | Test Category | Total Tests | ✅&nbsp;Success | ⏭️&nbsp;Skipped | ❌&nbsp;Failure | ❗&nbsp;Error |
 | :- | :- | :- | :- | :- | :- |
+| **Interfaces** | 1 | 0 | 0 | 1 | 0 |
 
 ## 🧪 Test Results <a id="test-results"></a>
 
 | Device | Categories | Test | Description | Custom Field | Result | Messages |
 | :- | :- | :- | :- | :- | :- | :- |
+| dc1-leaf1a | Interfaces | VerifyIPProxyARP | Verifies if Proxy ARP is enabled. | - | ❌&nbsp;Failure | Interface: Ethernet1 - Proxy-ARP disabled<br>Interface: Ethernet2 - Proxy-ARP disabled |

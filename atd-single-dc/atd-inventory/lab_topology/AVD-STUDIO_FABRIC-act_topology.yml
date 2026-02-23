@@ -5,7 +5,7 @@ veos:
   username: cvpadmin
   password: arista123
   version: 4.33.2F
-  intenert_acces: true
+  internet_access: true
 
 tools-server:
   username: ansible
@@ -40,7 +40,7 @@ nodes:
       version: 4.33.2F
   - tool-server:
       ip_addr: 192.168.0.6
-      node_type: generic
+      node_type: tools-server
 links:
     - connection:
         - s1-leaf1:Ethernet1

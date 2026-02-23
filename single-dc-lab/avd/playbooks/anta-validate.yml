@@ -1,7 +1,7 @@
 ---
 
 - name: Build Switch configuration
-  hosts: FABRIC
+  hosts: all
   connection: local
   gather_facts: false
   
@@ -9,20 +9,53 @@
     ansible_user: admin
     ansible_password: admin
     ansible_network_os: arista.eos.eos
-    # Configure privilege escalation
-    ansible_become: true
-    ansible_become_method: enable
-    # HTTPAPI configuration
     ansible_connection: httpapi
     ansible_httpapi_port: 443
     ansible_httpapi_use_ssl: true
     ansible_httpapi_validate_certs: false
+    api_preflight_command: "show version"
+    api_preflight_retries: 3
+    api_preflight_delay: 2
 
   tasks:
-        
+    - name: Preflight | Verify EOS eAPI connectivity (httpapi)
+      block:
+        - name: Preflight | Run a lightweight command via eAPI
+          arista.eos.eos_command:
+            commands:
+              - "{{ api_preflight_command }}"
+          register: preflight_result
+          retries: "{{ api_preflight_retries }}"
+          delay: "{{ api_preflight_delay }}"
+          until: preflight_result is succeeded
+
+        - name: Preflight | Show basic success details
+          ansible.builtin.debug:
+            msg:
+              host: "{{ inventory_hostname }}"
+              ok: true
+              command: "{{ api_preflight_command }}"
+              result_preview: >-
+                {{
+                  (preflight_result.stdout[0] | default(''))
+                  | string
+                  | regex_replace('\\s+', ' ')
+                  | truncate(180, True, '...')
+                }}
+      rescue:
+        - name: Preflight | Fail with a clear message
+          ansible.builtin.fail:
+            msg: |
+              Preflight failed for {{ inventory_hostname }}.
+              Could not reach/authenticate to EOS eAPI over httpapi.
+              Check:
+                - DNS/IP reachability to {{ inventory_hostname }}:{{ ansible_httpapi_port }}
+                - eAPI enabled on EOS (management api http-commands / unix-socket/http(s))
+                - creds (ansible_user/ansible_password) and privilege
+                - VRF/source-interface/firewall/ACL blocking 443
+              Ansible error: {{ ansible_failed_result.msg | default(ansible_failed_result) }}
     - name: validate using anta_runner
       ansible.builtin.import_role:
         name: arista.avd.anta_runner
       vars:
         avd_catalogs_enabled: false
-        user_catalogs_dir: "{{ anta_dir }}/b200_catelogs"
