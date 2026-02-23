@@ -1,2 +1,2 @@
 Device,Test Name,Test Status,Message(s),Test description,Test category
-dc1-leaf1a,VerifyIPProxyARP,failure,Interface: Ethernet1 - Proxy-ARP disabled - Interface: Ethernet2 - Proxy-ARP disabled,Verifies if Proxy ARP is enabled.,Interfaces
+dc1-leaf1a,VerifyIPProxyARP,failure,Interface: Ethernet1 - Not found - Interface: Ethernet2 - Not found,Verifies if Proxy ARP is enabled.,Interfaces

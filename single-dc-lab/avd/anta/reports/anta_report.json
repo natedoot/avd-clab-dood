@@ -8,8 +8,8 @@
         "description": "Verifies if Proxy ARP is enabled.",
         "result": "failure",
         "messages": [
-            "Interface: Ethernet1 - Proxy-ARP disabled",
-            "Interface: Ethernet2 - Proxy-ARP disabled"
+            "Interface: Ethernet1 - Not found",
+            "Interface: Ethernet2 - Not found"
         ],
         "atomic_results": [],
         "custom_field": null

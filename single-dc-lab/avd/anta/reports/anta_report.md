@@ -33,4 +33,4 @@
 
 | Device | Categories | Test | Description | Custom Field | Result | Messages |
 | :- | :- | :- | :- | :- | :- | :- |
-| dc1-leaf1a | Interfaces | VerifyIPProxyARP | Verifies if Proxy ARP is enabled. | - | ❌&nbsp;Failure | Interface: Ethernet1 - Proxy-ARP disabled<br>Interface: Ethernet2 - Proxy-ARP disabled |
+| dc1-leaf1a | Interfaces | VerifyIPProxyARP | Verifies if Proxy ARP is enabled. | - | ❌&nbsp;Failure | Interface: Ethernet1 - Not found<br>Interface: Ethernet2 - Not found |
