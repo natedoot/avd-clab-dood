@@ -59,3 +59,4 @@
         name: arista.avd.anta_runner
       vars:
         avd_catalogs_enabled: false
+        user_catalogs_dir: "{{ anta_dir }}/{{ user_catalogs_dir_name }}/interfaces/"
