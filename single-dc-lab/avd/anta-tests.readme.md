@@ -127,6 +127,9 @@ dc1-leaf1a                 : ok=4    changed=0    unreachable=0    failed=1    s
     ansible_httpapi_port: 443
     ansible_httpapi_use_ssl: true
     ansible_httpapi_validate_certs: false
+    api_preflight_command: "show version"
+    api_preflight_retries: 3
+    api_preflight_delay: 2
 
   tasks:
     - name: validate using anta_runner

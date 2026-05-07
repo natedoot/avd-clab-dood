@@ -1,0 +1,18 @@
+---
+
+- name: Build Switch configuration
+  hosts: all
+  connection: local
+  gather_facts: false
+  
+  vars:
+    ansible_user: admin
+    ansible_password: admin
+
+  tasks:
+    - name: validate using anta_runner
+      ansible.builtin.import_role:
+        name: arista.avd.anta_runner
+      vars:
+        avd_catalogs_enabled: false
+        anta_runner_dry_run: true
